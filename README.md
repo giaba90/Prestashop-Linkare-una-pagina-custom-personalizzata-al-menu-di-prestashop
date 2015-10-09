@@ -1,4 +1,4 @@
-[Prestashop] Linkare una pagina custom(personalizzata) al menu di prestashop
+Linkare una pagina custom(personalizzata) al menu di prestashop
 ======================================================
 
 Per prima cosa bisogna creare una pagina custom :
@@ -26,7 +26,7 @@ class NewPageControllerCore extends FrontController
 }
 ```
 
-Il file **NewPageController.php** deve essere salvato nella cartella **controller**, mentre i file js e css riferiti alla nostra pagina custom devono essere salvate all’interno delle cartelle js e css del tema stesso.
+Il file **NewPageController.php** deve essere salvato nella cartella **controller**, mentre i file js e css riferiti alla nostra pagina custom devono essere salvati all’interno delle cartelle js e css del tema stesso.
 
 2. Creiamo la pagina **new-page.php** ed incolliamo al suo interno questo codice
 ```php
@@ -51,8 +51,51 @@ Ultima cosa da fare e’ andare nel **Back Office -> Preferenze -> SEO & URLs** 
 
 Così facendo la vostra pagina sarà visibile all’indirizzo miosito.it/custom-new-page 
 
-—————
+---
+
+Per aggiungere questa pagina appena creata al nostro menu' dopo seguire questi passagi.
+Mettiamo il caso di voler creare la voce di menu' ** Azienda ** che ha come sottovoce *Mission*
+
+dobbiamo innanzittutto creare dal Back Office di Prestashop una categoria a cui diamo il nome di Azienda, poi creiamo una pagina sempre dal back office di prestashop e gli diamo il nome Mission. Una volta cliccato su *Salva* la pagina appena creata sara' visualizzata nell'elenco. Da qui prendiamo l'id come mostrato in figura
+
+ed andiamo a modificare il file blocktopmenu.php si trova in modules -> blocktopmenu 
+sostituendo questo codice qui
+```php
+foreach ($pages as $page)
+			{
+				$cms = new CMS($page['id_cms'], (int)$id_lang);
+				$links = $cms->getLinks((int)$id_lang, array((int)$cms->id));
+
+				$selected = ($this->page_name == 'cms' && ((int)Tools::getValue('id_cms') == $page['id_cms'])) ? ' class="sfHoverForce"' : '';
+				$this->_menu .= '<li '.$selected.'>';
+				$this->_menu .= '<a href="'.$links[0]['link'].'">'.$cms->meta_title.'</a>';
+				$this->_menu .= '</li>';
+			}
+```
+con questo
+```php
+foreach ($pages as $page)
+			{
+				$cms = new CMS($page['id_cms'], (int)$id_lang);
+				$links = $cms->getLinks((int)$id_lang, array((int)$cms->id));
+
+				$selected = ($this->page_name == 'cms' && ((int)Tools::getValue('id_cms') == $page['id_cms'])) ? ' class="sfHoverForce"' : '';
+                if ($cms->id==9){
+				$this->_menu .= '<li '.$selected.'>';
+				$this->_menu .= '<a href="URL_TO_GALLERY">'.$cms->meta_title.'</a>';
+				$this->_menu .= '</li>';
+                } else {
+                $this->_menu .= '<li '.$selected.'>';
+				$this->_menu .= '<a href="'.$links[0]['link'].'">'.$cms->meta_title.'</a>';
+				$this->_menu .= '</li>';    
+                }
+			}
+```
+nel mio ho scritto ```php $cms->id==9 ``` perchè era l'id della mia pagina era 9
+
 
 
 Create submenu links with custom page
 =====================================
+
+ENG VERSION WILL COMING SOON
