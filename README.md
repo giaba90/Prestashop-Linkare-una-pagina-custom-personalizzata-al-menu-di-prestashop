@@ -58,6 +58,9 @@ Mettiamo il caso di voler creare la voce di menu' ** Azienda ** che ha come sott
 
 dobbiamo innanzittutto creare dal Back Office di Prestashop una categoria a cui diamo il nome di Azienda, poi creiamo una pagina sempre dal back office di prestashop e gli diamo il nome Mission. Una volta cliccato su *Salva* la pagina appena creata sara' visualizzata nell'elenco. Da qui prendiamo l'id come mostrato in figura
 
+![alt text](https://github.com/giaba90/Prestashop-Linkare-una-pagina-custom-personalizzata-al-menu-di-prestashop/blob/master/presta.jpg "Prestashop create page")
+
+
 ed andiamo a modificare il file blocktopmenu.php si trova in modules -> blocktopmenu 
 sostituendo questo codice qui
 ```php
