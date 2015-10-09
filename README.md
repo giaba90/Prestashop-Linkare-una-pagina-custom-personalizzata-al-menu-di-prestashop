@@ -94,7 +94,7 @@ foreach ($pages as $page)
                 }
 			}
 ```
-nel mio ho scritto ```php $cms->id==9 ``` perchè era l'id della mia pagina era 9
+nel mio ho scritto ```$cms->id==9 ``` perchè l'id della mia pagina era 9
 
 
 
